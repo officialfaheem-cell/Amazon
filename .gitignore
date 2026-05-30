@@ -1,0 +1,13 @@
+# Ignore the generated index.html (only template should be committed)
+index.html
+
+# But keep the template
+!index.template.html
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
